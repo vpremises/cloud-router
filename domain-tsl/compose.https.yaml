@@ -2,7 +2,7 @@ version: '3'
 
 services:
   proxy:
-    image: coelaoss/traefik-v3.0.0-beta5:debian
+    image: ${TRAEFIK_IMAGE:?Set TRAEFIK_IMAGE to a verified image reference}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/traefik.toml:/etc/traefik/traefik.toml

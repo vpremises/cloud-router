@@ -2,7 +2,7 @@ version: '3'
 
 services:
   traefik:
-    image: "coelaoss/traefik-v3.0.0-beta5:debian"
+    image: "${TRAEFIK_IMAGE:?Set TRAEFIK_IMAGE to a verified image reference}"
     ports:
       - "80:80"
       - "8080:8080"
