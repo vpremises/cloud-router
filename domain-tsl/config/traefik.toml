@@ -5,7 +5,7 @@ sendAnonymousUsage = false
 [log]
 
 # Default: "ERROR"
-level = "DEBUG"
+level = "INFO"
 
 [entryPoints]
 [entryPoints.web]
@@ -27,10 +27,10 @@ entryPoint = "web"
 [api]
 
 # Default: false
-insecure = true
+insecure = false
 
 # Default: true
-# dashboard = false
+dashboard = false
 
 #[providers.file]
 #directory = "dynamic"
@@ -44,7 +44,7 @@ insecure = true
 #defaultRule = "Host(`{{ normalize .Name }}.docker.localhost`)"
 
 # Default: true
-#exposedByDefault = false
+exposedByDefault = false
 
 # Default use bridge network
 network = "traefik-public"
@@ -59,7 +59,7 @@ network = "traefik-public"
 #defaultRule = "Host(`{{ normalize .Name }}.docker.localhost`)"
 
 # Default: true
-#exposedByDefault = false
+exposedByDefault = false
 
 # Default use overlay network
 #network = "proxy-net"

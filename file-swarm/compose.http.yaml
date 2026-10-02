@@ -1,25 +1,25 @@
 version: '3'
-
 services:
   proxy:
     image: ${TRAEFIK_IMAGE:?Set TRAEFIK_IMAGE to a verified image reference}
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config:/etc/traefik
+    - ./config:/etc/traefik
     ports:
-      # Sync config/traefik.toml entrypoints
-      - "80:80"
-      - "81:81"
-      - "82:82"
-      - "83:83"
-      - "8080:8080"
+    - 80:80
+    - 81:81
+    - 82:82
+    - 83:83
     restart: always
     networks:
-      - traefik-public
-      - proxy-net
+    - traefik-public
+    - proxy-net
     labels:
-      - traefik.enable=true
-
+    - traefik.enable=true
+    environment:
+      TRAEFIK_PROVIDERS_SWARM_ENDPOINT: ${DOCKER_API_ENDPOINT:?Set a restricted Docker
+        API endpoint}
+      TRAEFIK_PROVIDERS_DOCKER_ENDPOINT: ${DOCKER_API_ENDPOINT:?Set a restricted Docker
+        API endpoint}
 networks:
   traefik-public:
     external: true

@@ -5,7 +5,7 @@ sendAnonymousUsage = false
 [log]
 
 # Default: "ERROR"
-level = "DEBUG"
+level = "INFO"
 
 [accessLog]
 
@@ -18,10 +18,10 @@ address = ":80"
 [api]
 
 # Default: false
-insecure = true
+insecure = false
 
 # Default: true
-# dashboard = false
+dashboard = false
 
 [providers.swarm]
 
@@ -33,7 +33,7 @@ insecure = true
 #defaultRule = "Host(`{{ normalize .Name }}.docker.localhost`)"
 
 # Default: true
-#exposedByDefault = false
+exposedByDefault = false
 
 # Default use overlay network
 #network = "proxy-net"

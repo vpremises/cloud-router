@@ -1,40 +1,30 @@
 version: '3'
-
 services:
   traefik:
-    image: "${TRAEFIK_IMAGE:?Set TRAEFIK_IMAGE to a verified image reference}"
+    image: ${TRAEFIK_IMAGE:?Set TRAEFIK_IMAGE to a verified image reference}
     ports:
-      - "80:80"
-      - "8080:8080"
+    - 80:80
     command:
-      - --entrypoints.web.address=:80
-      #- --entrypoints.websecure.address=:443
-      - --providers.swarm=true
-      #- --providers.docker.swarmMode=true
-      - --providers.swarm.exposedbydefault=false
-      - --providers.swarm.network=proxy-net
-      - --api
-      - --api.insecure
-      - --log.level=DEBUG
+    - --entrypoints.web.address=:80
+    - --providers.swarm=true
+    - --providers.swarm.exposedbydefault=false
+    - --providers.swarm.network=proxy-net
+    - --api
+    - --api.insecure=false
+    - --log.level=INFO
     networks:
-      - proxy-net
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      #- ./config:/etc/traefik
+    - proxy-net
+    volumes: []
     deploy:
       labels:
-        - traefik.enable=true
-        - traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)
-        - traefik.http.routers.http-catchall.entrypoints=web
-        - traefik.http.routers.router-traefik.entrypoints=traefik
-        - traefik.http.routers.router-traefik.rule=HOST(`localhost`)
-        - traefik.http.routers.router-traefik.service=api@internal
-        - traefik.http.services.router-traefik.loadbalancer.server.port=8080
-
+      - traefik.enable=true
+      - traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)
+      - traefik.http.routers.http-catchall.entrypoints=web
+    environment:
+      TRAEFIK_PROVIDERS_SWARM_ENDPOINT: ${DOCKER_API_ENDPOINT:?Set a restricted Docker
+        API endpoint}
 volumes:
-  portainer_data:
-
-
+  portainer_data: null
 networks:
   proxy-net:
     external: true

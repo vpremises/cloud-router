@@ -5,7 +5,7 @@ sendAnonymousUsage = false
 [log]
 
 # Default: "ERROR"
-level = "DEBUG"
+level = "INFO"
 
 [accessLog]
 
@@ -27,10 +27,10 @@ address = ":83"
 [api]
 
 # Default: false
-insecure = true
+insecure = false
 
 # Default: true
-# dashboard = false
+dashboard = false
 
 [providers.file]
 directory = "/etc/traefik/dynamic"
