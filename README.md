@@ -1,29 +1,26 @@
-# Cloud Router
+# cloud-router
 
-Finding the best practice of edge routing with docker swarm &amp; traefik.
+Study how a Swarm deployment can route application traffic through Traefik.
 
-## Status
+## What you can do
 
-The structure is changed for each directory.
+- Review service routing and explicit image references.
+- Separate routing from privileged management services.
 
-### file-swarm 
+## Current scope
 
-Use File provider and Swarm provider.
+These are deployment examples. Review the restricted Docker API endpoint, images and management-service privileges before running them; no stack is deployed automatically.
 
-Run a standalone docker container with file provider to proxy swarm overlay network.
+Package distribution is not activated by this documentation. Use the checked-in source and the declared dependency versions; published availability must be verified separately.
 
-### swarm-only (wip)
+## Getting started
 
-Use Swarm provider only.
+Start with the implementation and examples linked below. Review registered configuration and prerequisites before running a command that writes state or contacts a service.
 
-Swarm cluster include traefik container routing all service.
+## Documentation and source
 
-Work in progress but this structure may not work in traefik V3 yet...
+[Interface reference](docs/interface-reference.md)
 
-## Image source and deployment inputs
+[Usage guide](docs/getting-started.md)
 
-Image build sources are maintained independently in [port-office](https://github.com/vpremises/port-office). Before using these examples, set `TRAEFIK_IMAGE` to an available, inspected image digest. The planned `ghcr.io/vpremises` namespace is not populated by this source migration. Compose refuses a missing image setting. Registry publication, Swarm deployment, host names, credentials, and TLS configuration remain explicit operator inputs.
-
-## Security defaults
-
-Traefik dashboard exposure is disabled, the insecure API port is not published, and debug logging is disabled. Routing requires explicit labels. Traefik examples require `DOCKER_API_ENDPOINT` for an operator-managed restricted Docker API proxy; they do not mount the host Docker socket. Configure endpoint authorization and TLS before deployment. The separate Swarmpit/Portainer examples are management applications with elevated Docker privileges and require a restricted administrative network and explicit operator approval. Historical image versions must undergo a full vulnerability review before any production release.
+[Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md) · [License](LICENSE) · [Attribution notices](NOTICE)
