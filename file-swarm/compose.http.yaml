@@ -3,7 +3,7 @@ services:
   proxy:
     image: ${TRAEFIK_IMAGE:?Set TRAEFIK_IMAGE to a verified image reference}
     volumes:
-    - ./config:/etc/traefik
+    - ./config:/etc/traefik:ro
     ports:
     - 80:80
     - 81:81

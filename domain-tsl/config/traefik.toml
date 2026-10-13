@@ -16,8 +16,9 @@ address = ":443"
 
 
 [certificatesResolvers.le.acme]
-email = "admin@example.com"
-storage = "/etc/traefik/acme.json"
+
+# Email is a required operator input in Compose, never a shared example identity.
+storage = "/var/lib/traefik/acme.json"
 # Default: "https://acme-v02.api.letsencrypt.org/directory"
 #caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
 [certificatesResolvers.le.acme.httpChallenge]

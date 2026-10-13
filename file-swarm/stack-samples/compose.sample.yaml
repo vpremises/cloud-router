@@ -4,12 +4,15 @@ services:
 
   whoami:
     # A container that exposes an API to show its IP address
-    image: traefik/whoami
+    image: ${WHOAMI_IMAGE:?Supply a reviewed whoami image digest}
     networks:
       - proxy-net
     deploy:
       labels:
         - traefik.enable=true
+        - traefik.http.routers.sample-whoami.rule=Host(`${APP_HOST:?Supply an explicit application host}`)
+        - traefik.http.routers.sample-whoami.entrypoints=web
+        - traefik.http.routers.sample-whoami.service=sample-whoami
         - traefik.http.services.sample-whoami.loadbalancer.server.port=80
 
 networks:
