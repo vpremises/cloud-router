@@ -4,7 +4,10 @@
   "responsibility_boundary": "Own the named environment configuration/planning or application deployment composition. Generic security and provider mechanisms reuse their managed owners; real profiles/secrets and actual environment activation are separate.",
   "packages": [],
   "schema_definitions": [],
-  "test_sources": [],
+  "test_sources": [
+    "scripts/validate_config.py",
+    "tests/test_routing_source.py"
+  ],
   "example_sources": [],
   "workflow_definitions": [
     {
@@ -36,6 +39,36 @@
             {
               "name": "Check policy types",
               "run": "python3 -m venv \"$RUNNER_TEMP/policy-types\"\n\"$RUNNER_TEMP/policy-types/bin/pip\" install -r .github/policy/requirements.txt\n\"$RUNNER_TEMP/policy-types/bin/mypy\" --strict .github/policy .github/oss-policy-check.py .github/policy-tests\n",
+              "uses": null,
+              "condition": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/routing-source.yml",
+      "jobs": [
+        {
+          "job": "compose-admission",
+          "condition": null,
+          "runs_on": "ubuntu-24.04",
+          "steps": [
+            {
+              "name": null,
+              "run": null,
+              "uses": "actions/checkout@v4",
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": null,
+              "uses": "actions/setup-python@v5",
+              "condition": null
+            },
+            {
+              "name": "Validate routing composition without deployment",
+              "run": "python3 -m unittest discover -s tests -v",
               "uses": null,
               "condition": null
             }
