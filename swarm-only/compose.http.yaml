@@ -17,9 +17,7 @@ services:
     volumes: []
     deploy:
       labels:
-      - traefik.enable=true
-      - traefik.http.routers.http-catchall.rule=HostRegexp(`{host:.+}`)
-      - traefik.http.routers.http-catchall.entrypoints=web
+      - traefik.enable=false
     environment:
       TRAEFIK_PROVIDERS_SWARM_ENDPOINT: ${DOCKER_API_ENDPOINT:?Set a restricted Docker
         API endpoint}

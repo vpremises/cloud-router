@@ -3,7 +3,8 @@ services:
   proxy:
     image: ${TRAEFIK_IMAGE:?Set TRAEFIK_IMAGE to a verified image reference}
     volumes:
-    - ./config/traefik.toml:/etc/traefik/traefik.toml
+    - ./config/traefik.toml:/etc/traefik/traefik.toml:ro
+    - acme-data:/var/lib/traefik
     ports:
     - 80:80
     - 443:443
@@ -16,6 +17,8 @@ services:
     - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
     - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
     environment:
+      TRAEFIK_CERTIFICATESRESOLVERS_LE_ACME_EMAIL: ${ACME_EMAIL:?Supply an operator ACME contact}
+      TRAEFIK_PROVIDERS_DOCKER_ENDPOINT: ${DOCKER_API_ENDPOINT:?Set a restricted Docker API endpoint}
       TRAEFIK_PROVIDERS_SWARM_ENDPOINT: ${DOCKER_API_ENDPOINT:?Set a restricted Docker
         API endpoint}
 networks:
@@ -23,3 +26,6 @@ networks:
     external: true
   proxy-net:
     external: true
+
+volumes:
+  acme-data: {}

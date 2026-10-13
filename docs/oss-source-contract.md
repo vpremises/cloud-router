@@ -59,3 +59,18 @@ Schema definitions in the map remain owned by their canonical validator and
 consumers. An absent schema file means no separate schema file is declared; it does
 not mean the runtime interface has no validation. Do not introduce another common
 schema solely to mirror an implementation type.
+
+## Routing ownership and acceptance
+
+This repository owns source composition for the three named routing templates and
+explicit whoami samples, not Docker OS images, cloud credentials or management
+applications. `scripts/validate_config.py` admits a bounded compiled config only
+with immutable image digests, restricted HTTPS API ownership and no direct Docker
+socket/host privilege/dashboard exposure. Five Docker Compose source tests run in
+`routing-source.yml`. Invalid shared dashboard routing was removed; management/WIP
+examples do not belong to the accepted routing subset. Historical source remains
+in Git when removed. Actual image/runtime/TLS/deployment acceptance is separate.
+
+The proxy itself does not declare a catch-all application router. Application
+samples bind an explicit host and service. The old named-regexp v2 catch-all is
+removed consistently with [Traefik v3 rule syntax](https://doc.traefik.io/traefik/v3.0/routing/routers/).

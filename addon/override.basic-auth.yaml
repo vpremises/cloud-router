@@ -1,5 +1,4 @@
 services:
   proxy:
     labels:
-      - traefik.http.routers.traefik-public.middlewares=admin-auth
-      - traefik.http.middlewares.admin-auth.basicauth.users=admin:$$apr1$$nt3s3Hgy$$7gI/Hasns4Xslvr5VhpY71
+      - traefik.http.middlewares.admin-auth.basicauth.users=${ADMIN_AUTH_USERS:?Supply an operator-managed htpasswd value}
