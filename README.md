@@ -50,3 +50,5 @@ and validate its saved JSON with `python3 scripts/validate_config.py <file.json>
 before separately reviewing deployment. Admission checks immutable image digests,
 API endpoint scope and privilege exposure; it cannot establish image provenance,
 endpoint authorization or actual certificate validity.
+
+Dependency updates: [repository policy](docs/dependency-updates.md).
