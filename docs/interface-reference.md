@@ -22,7 +22,7 @@ Work in progress but this structure may not work in traefik V3 yet...
 
 ## Image source and deployment inputs
 
-Image build sources are maintained independently in [port-office](https://github.com/vpremises/port-office). Before using these examples, set `TRAEFIK_IMAGE` to an available, inspected image digest. The planned `ghcr.io/vpremises` namespace is not populated by this source migration. Compose refuses a missing image setting. Registry publication, Swarm deployment, host names, credentials, and TLS configuration remain explicit operator inputs.
+Before using these examples, set `TRAEFIK_IMAGE` to an available, inspected image digest. The consuming deployment owns image selection and verification; this repository does not publish base images. Compose refuses a missing image setting. Registry publication, Swarm deployment, host names, credentials, and TLS configuration remain explicit operator inputs.
 
 ## Security defaults
 
